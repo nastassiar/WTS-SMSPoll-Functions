@@ -9,5 +9,7 @@ To Deploy these functions to Azure
 - If the functions don't automatically create go to Deployment Options and click sync
 - After the functions have been created go to Platform Features
 - Select Application Setting
-- Add an app setting for'AzureWebJobsAzureWebJobsServiceBus' with the connect string to the service bus queue
+- Add an app settings for:
+  -'AzureWebJobsAzureWebJobsServiceBus' with the connection string to the service bus queue
+  - 'shujaazdata_DOCUMENTDB' with the connection string to CosmosDB
 

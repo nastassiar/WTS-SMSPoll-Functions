@@ -1,0 +1,22 @@
+{
+  "bindings": [
+    {
+      "name": "item",
+      "type": "serviceBusTrigger",
+      "direction": "in",
+      "queueName": "tostore",
+      "connection": "AzureWebJobsServiceBus",
+      "accessRights": "Manage"
+    },
+    {
+      "type": "documentDB",
+      "name": "document",
+      "databaseName": "SocialMediaData",
+      "collectionName": "{collectionName}",
+      "createIfNotExists": true,
+      "connection": "shujaazdata_DOCUMENTDB",
+      "direction": "out"
+    }
+  ],
+  "disabled": false
+}

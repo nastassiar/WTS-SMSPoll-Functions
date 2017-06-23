@@ -1,0 +1,21 @@
+{
+  "bindings": [
+    {
+      "name": "item",
+      "type": "serviceBusTrigger",
+      "direction": "in",
+      "queueName": "toparse",
+      "connection": "AzureWebJobsServiceBus",
+      "accessRights": "Manage"
+    },
+    {
+      "type": "serviceBus",
+      "name": "output",
+      "queueName": "tostore",
+      "connection": "AzureWebJobsServiceBus",
+      "accessRights": "Manage",
+      "direction": "out"
+    }
+  ],
+  "disabled": false
+}

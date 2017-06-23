@@ -1,0 +1,22 @@
+{
+  "bindings": [
+    {
+      "name": "queueItem",
+      "type": "serviceBusTrigger",
+      "direction": "in",
+      "queueName": "sms_toprocess",
+      "connection": "AzureWebJobsServiceBus",
+      "accessRights": "Manage"
+    },
+    {
+      "type": "documentDB",
+      "name": "outputDocument",
+      "databaseName": "SocialMediaData",
+      "collectionName": "SMSMsgs",
+      "createIfNotExists": true,
+      "connection": "shujaazdata_DOCUMENTDB",
+      "direction": "out"
+    }
+  ],
+  "disabled": false
+}

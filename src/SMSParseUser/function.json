@@ -1,0 +1,21 @@
+{
+  "bindings": [
+    {
+      "name": "item",
+      "type": "serviceBusTrigger",
+      "direction": "in",
+      "queueName": "surveyprofile_toprocess",
+      "connection": "AzureWebJobsServiceBus",
+      "accessRights": "Manage"
+    },
+    {
+      "type": "serviceBus",
+      "name": "output",
+      "queueName": "sms_userstore",
+      "connection": "AzureWebJobsServiceBus",
+      "accessRights": "Manage",
+      "direction": "out"
+    }
+  ],
+  "disabled": false
+}

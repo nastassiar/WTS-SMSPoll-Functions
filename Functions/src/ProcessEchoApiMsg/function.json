@@ -11,8 +11,8 @@
     {
       "type": "documentDB",
       "name": "outputDocument",
-      "databaseName": "SocialMediaData",
-      "collectionName": "SMSMsgs",
+      "databaseName": "WTSSocialMediaDB",
+      "collectionName": "SocialMedia",
       "createIfNotExists": true,
       "connection": "shujaazdata_DOCUMENTDB",
       "direction": "out"

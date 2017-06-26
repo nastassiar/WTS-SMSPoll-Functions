@@ -11,10 +11,10 @@
     {
       "type": "documentDB",
       "name": "document",
-      "databaseName": "SocialMediaData",
-      "collectionName": "{collectionName}",
+      "databaseName": "WTSSocialMediaDB",
+      "collectionName": "FacebookData",
       "createIfNotExists": true,
-      "connection": "shujaazdata_DOCUMENTDB",
+      "connection": "CosmosDB_Connection",
       "direction": "out"
     }
   ],

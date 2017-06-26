@@ -12,14 +12,14 @@ public static void Run(string item, TraceWriter log, ICollector<object> output)
     dynamic i = JObject.Parse(item);
     
     // If its not from the pages feed don't process it!
-    if (i.@object == page)
+    if (i.@object == "page")
     {
         foreach (var entry in i.entry)
         {
             foreach (var change in entry.changes)
             {
                 // Depending on the field Map a certain way!
-                if (change.@field == feed)
+                if (change.@field == "feed")
                 {
                     // Used for sorting into collections 
                     // If the object is a post, photo, status, video that has a unique FB id use that as the Id otherwise don't set
@@ -27,12 +27,12 @@ public static void Run(string item, TraceWriter log, ICollector<object> output)
                     string id = null;
                     switch (type)
                     {
-                        case like :
+                        case like:
                             // Likes go into reaction collection!
                             // No id set!
                             type = "reaction";
                             break;
-                        case comment :
+                        case comment:
                             // Comments go into the comment collection!
                             // Id is the commentId!
                             type = change.value.item;
@@ -67,7 +67,8 @@ public static void Run(string item, TraceWriter log, ICollector<object> output)
                     }
                     var record = new
                     {
-                        // The value of the change sent by facebook (For Testing) TODO Remove metadata = change.value,
+                        // The value of the change sent by facebook (For Testing) TODO Remove 
+                        metadata = change.value,
                         type = type,
                         id = id,
                         pageId = entry.id,
@@ -99,7 +100,7 @@ public static void Run(string item, TraceWriter log, ICollector<object> output)
                         // The reaction type
                         reactionType = change.value.item == like ? "like" : change.value.reaction_type, // Should this be overridden
                         // 0 means unpublished, 1 means published
-                        published = change.value.published,
+                        published = change.value.published
                     };
 
                     log.Info("Record : "+record);
@@ -108,7 +109,7 @@ public static void Run(string item, TraceWriter log, ICollector<object> output)
                 }
                 /* 
                 // Don't bother logging conversations at the moment since they don't have any information 
-                else if (change.@field == conversations)
+                else if (change.@field == "conversations")
                 {
                     var record = new 
                     {
@@ -117,14 +118,10 @@ public static void Run(string item, TraceWriter log, ICollector<object> output)
 
                         pageId = entry.id,
                         threadId = change.value.thread_id,
-                        type = conversations
+                        type = "conversations"
                     };
-                    log.Info(Record  +record);
-                    var obj = new {
-                        collectionName = record.type,
-                        record = record
-                    };
-                    output.Add(obj);
+                    log.Info("Record : " +record);
+                    output.Add(record);
                 }*/
             }
         }

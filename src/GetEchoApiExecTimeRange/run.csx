@@ -29,5 +29,6 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     {
         currentdtInUnixTimeStamp = nowInUnixTimeStamp,
         lastExecutionUnixTimeStamp = lastExecTimeStamp
+        
     });
 }

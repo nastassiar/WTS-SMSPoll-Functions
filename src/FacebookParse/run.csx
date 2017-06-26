@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Threading.Tasks;
 
-public static void Run(string item, TraceWriter log, ICollector<object> output)
+public static void Run(string item, TraceWriter log, ICollector<object> saveOutput, ICollector<object> userOutput)
 {
     log.Info($"FB Item : {item}");
     // TODO: Create mapping from json to different types? 
@@ -114,7 +114,20 @@ public static void Run(string item, TraceWriter log, ICollector<object> output)
 
                     
                     log.Info("Record : "+record);
-                    output.Add(record);
+                    saveOutput.Add(record);
+
+                    // If the post was not made by the page see if the user exists
+                    if (record.pageId != record.senderId)
+                    {
+                        var user = new 
+                        {
+                            senderId = record.senderId,
+                            senderName = record.senderName,
+                            createdTime = record.createdTime
+                        };
+                        log.Info("User : "+user);
+                        userOutput.Add(user);
+                    }
                     
                 }
                 /* 

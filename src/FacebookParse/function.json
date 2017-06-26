@@ -10,8 +10,16 @@
     },
     {
       "type": "serviceBus",
-      "name": "output",
+      "name": "saveOutput",
       "queueName": "tostore",
+      "connection": "AzureWebJobsServiceBus",
+      "accessRights": "Manage",
+      "direction": "out"
+    },
+    {
+      "type": "serviceBus",
+      "name": "userOutput",
+      "queueName": "fb_userstore",
       "connection": "AzureWebJobsServiceBus",
       "accessRights": "Manage",
       "direction": "out"

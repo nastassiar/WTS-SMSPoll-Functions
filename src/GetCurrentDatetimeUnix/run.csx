@@ -20,5 +20,6 @@ public static async Task<object> Run(HttpRequestMessage req, TraceWriter log)
     return req.CreateResponse(HttpStatusCode.OK, new
     {
         currentdtInUnixTimeStamp = unixTimeStampInSeconds
+        
     }); 
 }

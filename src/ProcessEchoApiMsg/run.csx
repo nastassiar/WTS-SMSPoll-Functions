@@ -16,6 +16,7 @@ public static void Run(string queueItem, out object outputDocument, TraceWriter 
     log.Info($"phone: {phone}");
     log.Info($"message: {message}");
 
+
     //string json = JsonConvert.SerializeObject(msg);
 
     outputDocument = msg;

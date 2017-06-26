@@ -18,11 +18,11 @@ public static void Run(string item, TraceWriter log, ICollector<object> output)
         {
             foreach (var change in entry.changes)
             {
-                 Depending on the field Map a certain way!
+                // Depending on the field Map a certain way!
                 if (change.@field == feed)
                 {
                     // Used for sorting into collections 
-                    // If the object is a postphotostatusvideo that has a unique FB id use that as the Id otherwise don't set
+                    // If the object is a post, photo, status, video that has a unique FB id use that as the Id otherwise don't set
                     string type = change.value.item;
                     string id = null;
                     switch (type)

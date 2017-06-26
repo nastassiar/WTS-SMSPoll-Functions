@@ -1,13 +1,13 @@
-#r Newtonsoft.Json
+#r "Newtonsoft.Json"
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Threading.Tasks;
 
-public static void Run(string item, TraceWriter log, ICollectorobject output)
+public static void Run(string item, TraceWriter log, ICollector<object> output)
 {
-    log.Info($FB Item  {item});
+    log.Info($"FB Item  {item}");
     // TODO Create mapping from json to different types 
     dynamic i = JObject.Parse(item);
     
@@ -27,39 +27,39 @@ public static void Run(string item, TraceWriter log, ICollectorobject output)
                     string id = null;
                     switch (type)
                     {
-                        case like
+                        case like :
                             // Likes go into reaction collection!
                             // No id set!
                             type = reaction;
                             break;
-                        case comment
+                        case comment :
                             // Comments go into the comment collection!
                             // Id is the commentId!
                             type = change.value.item;
                             id = change.value.comment_id;
                             break;
-                        case post
+                        case post :
                             // Post go into either userpost or pagepost (if the page and user id are the same) collection
                             // Id is the postid!
-                            type = change.value.sender_id == entry.id  pagepost  userpost;
+                            type = change.value.sender_id == entry.id ? "pagepost" : "userpost";
                             id = change.value.post_id;
                             break;
-                        case video
+                        case video :
                             // Post go into either userpost or pagepost (if the page and user id are the same) collection
                             // Id is the postid!
-                            type = change.value.sender_id == entry.id  pagepost  userpost;
+                            type = change.value.sender_id == entry.id ? "pagepost" : "userpost";
                             id = change.value.post_id;
                             break;
-                        case photo
+                        case photo :
                             // Post go into either userpost or pagepost (if the page and user id are the same) collection
                              // Id is the postid!
-                            type = change.value.sender_id == entry.id  pagepost  userpost;
+                            type = change.value.sender_id == entry.id ? "pagepost" : "userpost";
                             id = change.value.post_id;
                             break;
-                        case status
+                        case status :
                             // Post go into either userpost or pagepost (if the page and user id are the same) collection
                             // Id is the postid!
-                            type = change.value.sender_id == entry.id  pagepost  userpost;
+                            type = change.value.sender_id == entry.id ? "pagepost" : "userpost";
                             id = change.value.post_id;
                             break;
                         default
@@ -97,13 +97,12 @@ public static void Run(string item, TraceWriter log, ICollectorobject output)
                         isHidden = change.value.isHidden,
                         recipientId = change.value.recipient_id,
                         // The reaction type
-                        reactionType = change.value.item == like  like  change.value.reaction_type, // Should this be overridden
+                        reactionType = change.value.item == like ? "like" : change.value.reaction_type, // Should this be overridden
                         // 0 means unpublished, 1 means published
                         published = change.value.published,
                     };
 
-                    
-                    log.Info(Record  +record);
+                    log.Info("Record : "+record);
                     output.Add(record);
                     
                 }

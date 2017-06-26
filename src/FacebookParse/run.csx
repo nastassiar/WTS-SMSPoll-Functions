@@ -30,7 +30,7 @@ public static void Run(string item, TraceWriter log, ICollector<object> output)
                         case like :
                             // Likes go into reaction collection!
                             // No id set!
-                            type = reaction;
+                            type = "reaction";
                             break;
                         case comment :
                             // Comments go into the comment collection!
@@ -94,7 +94,7 @@ public static void Run(string item, TraceWriter log, ICollector<object> output)
                         // The value of the message (present for comments and posts etc.)
                         message = change.value.message,
                         // Whether or not the post is visible to the public
-                        isHidden = change.value.isHidden,
+                        isHidden = change.value.is_hidden,
                         recipientId = change.value.recipient_id,
                         // The reaction type
                         reactionType = change.value.item == like ? "like" : change.value.reaction_type, // Should this be overridden

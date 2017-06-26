@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 public static void Run(string item, TraceWriter log, ICollector<object> output)
 {
-    log.Info($"FB Item  {item}");
-    // TODO Create mapping from json to different types 
+    log.Info($"FB Item : {item}");
+    // TODO: Create mapping from json to different types? 
     dynamic i = JObject.Parse(item);
     
     // If its not from the pages feed don't process it!
@@ -18,57 +18,64 @@ public static void Run(string item, TraceWriter log, ICollector<object> output)
         {
             foreach (var change in entry.changes)
             {
-                // Depending on the field Map a certain way!
+                // Depending on the field? Map a certain way!
                 if (change.@field == "feed")
                 {
                     // Used for sorting into collections 
-                    // If the object is a post, photo, status, video that has a unique FB id use that as the Id otherwise don't set
+                    // If the object is a post/photo/status/video that has a unique FB id use that as the Id otherwise don't set
                     string type = change.value.item;
                     string id = null;
                     switch (type)
                     {
-                        case like:
+                        case "like":
                             // Likes go into reaction collection!
                             // No id set!
                             type = "reaction";
                             break;
-                        case comment:
+                        case "comment":
                             // Comments go into the comment collection!
                             // Id is the commentId!
                             type = change.value.item;
                             id = change.value.comment_id;
                             break;
-                        case post :
+                         case "share":
+                            // Comments go into the comment collection!
+                            // Id is the commentId!
+                            type = change.value.item;
+                            id = change.value.share_id;
+                            break;
+                        case "post":
                             // Post go into either userpost or pagepost (if the page and user id are the same) collection
                             // Id is the postid!
                             type = change.value.sender_id == entry.id ? "pagepost" : "userpost";
                             id = change.value.post_id;
                             break;
-                        case video :
+                        case "video":
                             // Post go into either userpost or pagepost (if the page and user id are the same) collection
                             // Id is the postid!
                             type = change.value.sender_id == entry.id ? "pagepost" : "userpost";
                             id = change.value.post_id;
                             break;
-                        case photo :
-                            // Post go into either userpost or pagepost (if the page and user id are the same) collection
-                             // Id is the postid!
-                            type = change.value.sender_id == entry.id ? "pagepost" : "userpost";
-                            id = change.value.post_id;
-                            break;
-                        case status :
+                        case "photo":
                             // Post go into either userpost or pagepost (if the page and user id are the same) collection
                             // Id is the postid!
                             type = change.value.sender_id == entry.id ? "pagepost" : "userpost";
                             id = change.value.post_id;
                             break;
-                        default
+                        case "status":
+                            // Post go into either userpost or pagepost (if the page and user id are the same) collection
+                            // Id is the postid!
+                            type = change.value.sender_id == entry.id ? "pagepost" : "userpost";
+                            id = change.value.post_id;
+                            break;
+                        default:
                             break;
                     }
                     var record = new
                     {
-                        // The value of the change sent by facebook (For Testing) TODO Remove 
+                        // The value of the change sent by facebook (For Testing) TODO: Remove
                         metadata = change.value,
+
                         type = type,
                         id = id,
                         pageId = entry.id,
@@ -86,11 +93,13 @@ public static void Run(string item, TraceWriter log, ICollector<object> output)
                         createdTime = change.value.created_time,
                         // The Id of the photo 
                         photoId = change.value.photo_id,
+                        // The Id of the Share 
+                        shareId = change.value.share_id,
                         // The Id of the photo 
                         link = change.value.link,
                         // The Id of the comment (To be used as ID if the item is a comment)
                         commentId = change.value.comment_id,
-                        // the Id of the post (to be used as ID if the item is a postphotovideo)
+                        // the Id of the post (to be used as ID if the item is a post/photo/video)
                         postId = change.value.post_id,
                         // The value of the message (present for comments and posts etc.)
                         message = change.value.message,
@@ -98,30 +107,34 @@ public static void Run(string item, TraceWriter log, ICollector<object> output)
                         isHidden = change.value.is_hidden,
                         recipientId = change.value.recipient_id,
                         // The reaction type
-                        reactionType = change.value.item == like ? "like" : change.value.reaction_type, // Should this be overridden
+                        reactionType = change.value.item == "like" ? "like" : change.value.reaction_type, // Should this be overridden
                         // 0 means unpublished, 1 means published
                         published = change.value.published
                     };
 
+                    
                     log.Info("Record : "+record);
                     output.Add(record);
                     
                 }
                 /* 
-                // Don't bother logging conversations at the moment since they don't have any information 
                 else if (change.@field == "conversations")
                 {
                     var record = new 
                     {
-                        // The value of the change sent by facebook (For Testing) TODO Remove
+                        // The value of the change sent by facebook (For Testing) TODO: Remove
                         metadata = change.value,
 
                         pageId = entry.id,
                         threadId = change.value.thread_id,
                         type = "conversations"
                     };
-                    log.Info("Record : " +record);
-                    output.Add(record);
+                    log.Info("Record : "+record);
+                    var obj = new {
+                        collectionName = record.type,
+                        record = record
+                    };
+                    output.Add(obj);
                 }*/
             }
         }

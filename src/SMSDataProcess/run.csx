@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-public static void Run(string queueItem, out string dataOutput, TraceWriter log)
+public static void Run(string queueItem, out object outSBMessage, TraceWriter log)
 {
     // Just save the object
     dynamic msg = JObject.Parse(queueItem);
@@ -26,5 +26,5 @@ public static void Run(string queueItem, out string dataOutput, TraceWriter log)
     log.Info($"phone: {entry.phone}");
     log.Info($"message: {entry.message}");
 
-    dataOutput = entry;
+    outSBMessage = entry;
 }

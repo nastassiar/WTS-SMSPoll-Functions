@@ -10,7 +10,7 @@
     },
     {
       "type": "serviceBus",
-      "name": "dataOutput",
+      "name": "outSBMessage",
       "queueName": "sms_data_tostore",
       "connection": "AzureWebJobsServiceBus",
       "accessRights": "Manage",

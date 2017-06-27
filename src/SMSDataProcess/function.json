@@ -1,0 +1,21 @@
+{
+  "bindings": [
+    {
+      "name": "queueItem",
+      "type": "serviceBusTrigger",
+      "direction": "in",
+      "queueName": "sms_data_toprocess",
+      "connection": "AzureWebJobsServiceBus",
+      "accessRights": "Manage"
+    },
+    {
+      "type": "serviceBus",
+      "name": "dataOutput",
+      "queueName": "sms_data_tostore",
+      "connection": "AzureWebJobsServiceBus",
+      "accessRights": "Manage",
+      "direction": "out"
+    }
+  ],
+  "disabled": false
+}

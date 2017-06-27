@@ -12,7 +12,7 @@
       "type": "documentDB",
       "name": "outputDocument",
       "databaseName": "WTSSocialMediaDB",
-      "collectionName": "users",
+      "collectionName": "Users",
       "createIfNotExists": true,
       "connection": "CosmosDB_Connection",
       "direction": "out"
@@ -21,7 +21,7 @@
       "type": "documentDB",
       "name": "documents",
       "databaseName": "WTSSocialMediaDB",
-      "collectionName": "users",
+      "collectionName": "Users",
       "connection": "CosmosDB_Connection",
       "direction": "in",
       "sqlQuery": "SELECT * FROM c where c.facebookId = {senderId}"

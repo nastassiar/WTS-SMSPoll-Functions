@@ -1,6 +1,6 @@
-#r "Newtonsoft.Json"
+#load "./Common.csx"
 
- #load "./Common.csx"
+#r "Newtonsoft.Json"
 
 using System;
 using System.Threading.Tasks;

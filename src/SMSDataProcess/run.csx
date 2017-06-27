@@ -11,7 +11,7 @@ public static void Run(string queueItem, out string outSBMessage, TraceWriter lo
 {
     log.Info("SMSDataProcess function processed message");
 
-    DateTime dt = ConvertTimestampToDatetime(1475283514);
+    System.DateTime dt = ConvertTimestampToDatetime(1475283514);
     log.Info($"Got converted Datetime: {dt}");
 
     // Just save the object

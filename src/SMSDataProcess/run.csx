@@ -1,7 +1,5 @@
 #r "Newtonsoft.Json"
 
-#load "./Common.csx"
-
 using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -37,4 +35,11 @@ public static void Run(string queueItem, out string outSBMessage, TraceWriter lo
     string json = JsonConvert.SerializeObject(entry);
 
     outSBMessage = json;
+}
+
+private static DateTime ConvertTimestampToDatetime(double unixTimestamp)
+{
+    // Unix timestamp is seconds past epoch
+    System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+    return dtDateTime.AddSeconds(unixTimestamp).ToLocalTime();
 }

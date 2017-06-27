@@ -1,6 +1,6 @@
-#load "./Common.csx"
-
 #r "Newtonsoft.Json"
+
+#load "./Common.csx"
 
 using System;
 using System.Threading.Tasks;
@@ -11,7 +11,7 @@ public static void Run(string queueItem, out string outSBMessage, TraceWriter lo
 {
     log.Info("SMSDataProcess function processed message");
 
-    Datetime dt = ConvertTimestampToDatetime(1475283514);
+    DateTime dt = ConvertTimestampToDatetime(1475283514);
     log.Info($"Got converted Datetime: {dt}");
 
     // Just save the object

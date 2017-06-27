@@ -4,17 +4,17 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-public static void Run(FacebookUserInfo item, IEnumerable<dynamic> documents, out object outputDocument, TraceWriter log)
+public static void Run(FacebookUserInfo queueItem, IEnumerable<dynamic> documents, out object outputDocument, TraceWriter log)
 {
-    //log.Info("item : "+ item);
+    //log.Info("queueItem : "+ queueItem);
     // TODO: Check if there is more than one user record?
     dynamic existingUser = documents.FirstOrDefault();
     if (existingUser != null)
     {
         log.Info("User found! Update!");
         //log.Info("inputDocument : "+ existingUser);
-        existingUser.lastUpdatedTime = item.createdTime;
-        existingUser.facebookName = item.senderName;
+        existingUser.lastUpdatedTime = queueItem.createdTime;
+        existingUser.facebookName = queueItem.senderName;
         outputDocument = existingUser;
     }
     else 
@@ -22,11 +22,11 @@ public static void Run(FacebookUserInfo item, IEnumerable<dynamic> documents, ou
         log.Info("User not found! Create!");
         outputDocument = new 
         {
-            Id = item.senderId,
-            facebookName = item.senderName,
-            facebookId = item.senderId,
-            createdTime = item.createdTime,
-            lastUpdatedTime = item.createdTime
+            Id = queueItem.senderId,
+            facebookName = queueItem.senderName,
+            facebookId = queueItem.senderId,
+            createdTime = queueItem.createdTime,
+            lastUpdatedTime = queueItem.createdTime
         };
     }
     

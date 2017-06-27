@@ -1,10 +1,10 @@
 {
   "bindings": [
     {
-      "name": "item",
+      "name": "queueItem",
       "type": "serviceBusTrigger",
       "direction": "in",
-      "queueName": "tostore",
+      "queueName": "fb_data_tostore",
       "connection": "AzureWebJobsServiceBus",
       "accessRights": "Manage"
     },
@@ -12,7 +12,7 @@
       "type": "documentDB",
       "name": "document",
       "databaseName": "WTSSocialMediaDB",
-      "collectionName": "FacebookData",
+      "collectionName": "FBData",
       "createIfNotExists": true,
       "connection": "CosmosDB_Connection",
       "direction": "out"

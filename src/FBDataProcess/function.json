@@ -1,0 +1,29 @@
+{
+  "bindings": [
+    {
+      "name": "queueItem",
+      "type": "serviceBusTrigger",
+      "direction": "in",
+      "queueName": "fb_data_toprocess",
+      "connection": "AzureWebJobsServiceBus",
+      "accessRights": "Manage"
+    },
+    {
+      "type": "serviceBus",
+      "name": "dataOutput",
+      "queueName": "fb_data_tostore",
+      "connection": "AzureWebJobsServiceBus",
+      "accessRights": "Manage",
+      "direction": "out"
+    },
+    {
+      "type": "serviceBus",
+      "name": "userOutput",
+      "queueName": "fb_user_tostore",
+      "connection": "AzureWebJobsServiceBus",
+      "accessRights": "Manage",
+      "direction": "out"
+    }
+  ],
+  "disabled": false
+}

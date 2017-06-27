@@ -1,30 +1,30 @@
 {
   "bindings": [
     {
-      "name": "item",
+      "name": "queueItem",
       "type": "serviceBusTrigger",
       "direction": "in",
-      "queueName": "sms_userstore",
+      "queueName": "fb_user_tostore",
       "connection": "AzureWebJobsServiceBus",
       "accessRights": "Manage"
     },
     {
       "type": "documentDB",
-      "name": "documents",
-      "databaseName": "WTSSocialMediaDB",
-      "collectionName": "userrecords",
-      "connection": "CosmosDB_Connection",
-      "direction": "in",
-      "sqlQuery": "SELECT * FROM c where c.phoneNumber = {phoneNumber}"
-    },
-    {
-      "type": "documentDB",
       "name": "outputDocument",
       "databaseName": "WTSSocialMediaDB",
-      "collectionName": "userrecords",
+      "collectionName": "users",
       "createIfNotExists": true,
       "connection": "CosmosDB_Connection",
       "direction": "out"
+    },
+    {
+      "type": "documentDB",
+      "name": "documents",
+      "databaseName": "WTSSocialMediaDB",
+      "collectionName": "users",
+      "connection": "CosmosDB_Connection",
+      "direction": "in",
+      "sqlQuery": "SELECT * FROM c where c.facebookId = {senderId}"
     }
   ],
   "disabled": false

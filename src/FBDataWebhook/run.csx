@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 
 public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, IAsyncCollector<string> output, TraceWriter log)
 {
-    
     if (req.Method == HttpMethod.Get)
     {
         log.Info("Handling a new subscription request.");
@@ -24,7 +23,7 @@ public static async Task<HttpResponseMessage> Run(HttpRequestMessage req, IAsync
             .Value;
 
         // If verification matches, return challenge
-        if (verify == GetEnvironmentVariable("FB_VERIFY_TOKEN"))
+        if (verify == GetEnvironmentVariable("FB_Verify_Token"))
         {
             log.Info("Get received. Token OK. New subscription created");
             var resp = new HttpResponseMessage(HttpStatusCode.OK);

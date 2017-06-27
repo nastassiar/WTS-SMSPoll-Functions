@@ -5,9 +5,9 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Threading.Tasks;
 
-public static void Run(string item, ICollector<object> output, TraceWriter log)
+public static void Run(string queueItem, ICollector<object> output, TraceWriter log)
 {
-    dynamic i = JObject.Parse(item);
+    dynamic i = JObject.Parse(queueItem);
 
     var surveys = i.client_surveys;
 

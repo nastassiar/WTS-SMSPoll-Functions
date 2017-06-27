@@ -14,7 +14,7 @@
     {
       "type": "serviceBus",
       "name": "output",
-      "queueName": "toparse",
+      "queueName": "fb_data_toprocess",
       "connection": "AzureWebJobsServiceBus",
       "accessRights": "Manage",
       "direction": "out"

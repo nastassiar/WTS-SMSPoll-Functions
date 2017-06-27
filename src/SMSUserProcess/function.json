@@ -1,25 +1,17 @@
 {
   "bindings": [
     {
-      "name": "item",
+      "name": "queueItem",
       "type": "serviceBusTrigger",
       "direction": "in",
-      "queueName": "toparse",
+      "queueName": "sms_user_toprocess",
       "connection": "AzureWebJobsServiceBus",
       "accessRights": "Manage"
     },
     {
       "type": "serviceBus",
-      "name": "saveOutput",
-      "queueName": "tostore",
-      "connection": "AzureWebJobsServiceBus",
-      "accessRights": "Manage",
-      "direction": "out"
-    },
-    {
-      "type": "serviceBus",
-      "name": "userOutput",
-      "queueName": "fb_userstore",
+      "name": "output",
+      "queueName": "sms_user_tostore",
       "connection": "AzureWebJobsServiceBus",
       "accessRights": "Manage",
       "direction": "out"

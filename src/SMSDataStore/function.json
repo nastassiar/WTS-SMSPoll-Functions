@@ -4,7 +4,7 @@
       "name": "queueItem",
       "type": "serviceBusTrigger",
       "direction": "in",
-      "queueName": "sms_toprocess",
+      "queueName": "sms_data_tostore",
       "connection": "AzureWebJobsServiceBus",
       "accessRights": "Manage"
     },

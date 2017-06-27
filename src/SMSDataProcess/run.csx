@@ -26,7 +26,7 @@ public static void Run(string queueItem, out string outSBMessage, TraceWriter lo
     log.Info($"phone: {entry.phone}");
     log.Info($"message: {entry.message}");
 
-    string json = JsonConvert.SerializeObject(msg);
+    string json = JsonConvert.SerializeObject(entry);
 
     outSBMessage = json;
 }

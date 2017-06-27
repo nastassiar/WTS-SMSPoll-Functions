@@ -1,5 +1,7 @@
 #r "Newtonsoft.Json"
 
+ #load "../Common.csx"
+
 using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -7,11 +9,17 @@ using Newtonsoft.Json.Linq;
 
 public static void Run(string queueItem, out string outSBMessage, TraceWriter log)
 {
+    log.Info("SMSDataProcess function processed message");
+
+    Datetime dt = ConvertTimestampToDatetime(1475283514);
+    log.Info($"Got converted Datetime: {dt}");
+
     // Just save the object
     dynamic msg = JObject.Parse(queueItem);
 
     var entry = new
     {
+        type = "smsmsg"
         status = msg.status,
         direction = msg.direction,
         phone = msg.phone,

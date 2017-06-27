@@ -9,8 +9,8 @@ public static void Run(string queueItem, out string outSBMessage, TraceWriter lo
 {
     log.Info("SMSDataProcess function processed message");
 
-    System.DateTime dt = ConvertTimestampToDatetime(1475283514);
-    log.Info($"Got converted Datetime: {dt}");
+    //System.DateTime dt = ConvertTimestampToDatetime(1475283514);
+    //log.Info($"Got converted Datetime: {dt}");
 
     // Just save the object
     dynamic msg = JObject.Parse(queueItem);
@@ -37,9 +37,11 @@ public static void Run(string queueItem, out string outSBMessage, TraceWriter lo
     outSBMessage = json;
 }
 
+/*
 private static DateTime ConvertTimestampToDatetime(double unixTimestamp)
 {
     // Unix timestamp is seconds past epoch
     System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
     return dtDateTime.AddSeconds(unixTimestamp).ToLocalTime();
 }
+*/

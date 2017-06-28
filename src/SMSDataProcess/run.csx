@@ -14,12 +14,7 @@ public static void Run(string queueItem, out string outSBMessage, TraceWriter lo
     // Just save the object
     dynamic msg = JObject.Parse(queueItem);
 
-    log.Info($"entry: {entry}");
-
-    log.Info($"phone: {msg.phone.Value}");
-    log.Info($"message: {msg.message.Value}");
-    log.Info($"dt_send: {msg.dt_send.Value}");
-    log.Info($"dt_requested: {msg.dt_requested.Value}");
+    log.Info($"Received: {queueItem}");
 
     var entry = new
     {
@@ -36,6 +31,11 @@ public static void Run(string queueItem, out string outSBMessage, TraceWriter lo
         dt_requested = ConvertTimestampToDatetime(msg.ts_requested.Value, log),
         channel_text = msg.channel_text
     };
+
+    log.Info($"phone: {msg.phone.Value}");
+    log.Info($"message: {msg.message.Value}");
+    log.Info($"dt_send: {msg.dt_send.Value}");
+    log.Info($"dt_requested: {msg.dt_requested.Value}");
 
     string json = JsonConvert.SerializeObject(entry);
 

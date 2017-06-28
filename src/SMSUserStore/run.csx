@@ -19,8 +19,8 @@ public static void Run(SMSUserInfo queueItem, IEnumerable<dynamic> documents, ou
         existingUser.name = queueItem.name ?? existingUser.name;
         existingUser.startTimestamp = queueItem.startTimestamp  ?? existingUser.startTimeStamp;
         existingUser.completeTimestamp = queueItem.completeTimestamp  ?? existingUser.completeTimestamp;
-        existingUser.lat = queueItem.lat ?? existingUser.lat;
-        existingUser.lon = queueItem.lon ?? existingUser.lon;
+        existingUser.lat = queueItem.lat != 0 ? queueItem.lat : existingUser.lat;
+        existingUser.lon = queueItem.lon != 0 ? queueItem.lon : existingUser.lon;
         existingUser.gender = queueItem.gender ?? existingUser.gender;
         existingUser.yob = queueItem.yob ?? existingUser.yob;
         existingUser.county = queueItem.county ?? existingUser.county;

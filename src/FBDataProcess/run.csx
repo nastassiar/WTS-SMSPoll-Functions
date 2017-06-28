@@ -1,5 +1,7 @@
 #r "Newtonsoft.Json"
 
+ #load "../Common.csx"
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -90,7 +92,7 @@ public static void Run(string queueItem, TraceWriter log, ICollector<object> dat
                         // What the change was to (comment, post, like, reaction etc.)
                         queueItem = change.value.queueItem,
                         // The time the change was made
-                        createdTime = change.value.created_time,
+                        createdTime = change.value.created_time != null ? ConvertTimestampToDatetime(change.value.created_time, log) : null,
                         // The Id of the photo 
                         photoId = change.value.photo_id,
                         // The Id of the Share 
@@ -125,30 +127,11 @@ public static void Run(string queueItem, TraceWriter log, ICollector<object> dat
                             senderName = record.senderName,
                             createdTime = record.createdTime
                         };
-                        log.Info("User : "+user);
+                        //log.Info("User : "+user);
                         userOutput.Add(user);
                     }
                     
                 }
-                /* 
-                else if (change.@field == "conversations")
-                {
-                    var record = new 
-                    {
-                        // The value of the change sent by facebook (For Testing) TODO: Remove
-                        metadata = change.value,
-
-                        pageId = entry.id,
-                        threadId = change.value.thread_id,
-                        type = "conversations"
-                    };
-                    log.Info("Record : "+record);
-                    var obj = new {
-                        collectionName = record.type,
-                        record = record
-                    };
-                    output.Add(obj);
-                }*/
             }
         }
     }

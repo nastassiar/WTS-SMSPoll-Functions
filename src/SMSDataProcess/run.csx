@@ -9,13 +9,17 @@ using Newtonsoft.Json.Linq;
 
 public static void Run(string queueItem, out string outSBMessage, TraceWriter log)
 {
-    log.Info("SMSDataProcess function processed message");
-
-    System.DateTime dt = ConvertTimestampToDatetime(1475283514);
-    log.Info($"Got converted Datetime: {dt}");
+    log.Info("SMSDataProcess function processing message");
 
     // Just save the object
     dynamic msg = JObject.Parse(queueItem);
+
+    log.Info($"entry: {entry}");
+
+    log.Info($"phone: {msg.phone.Value}");
+    log.Info($"message: {msg.message.Value}");
+    log.Info($"dt_send: {msg.dt_send.Value}");
+    log.Info($"dt_requested: {msg.dt_requested.Value}");
 
     var entry = new
     {
@@ -32,13 +36,6 @@ public static void Run(string queueItem, out string outSBMessage, TraceWriter lo
         dt_requested = ConvertTimestampToDatetime(msg.ts_requested.Value, log),
         channel_text = msg.channel_text
     };
-
-    log.Info($"entry: {entry}");
-
-    //log.Info($"phone: {entry.phone}");
-    //log.Info($"message: {entry.message}");
-    //log.Info($"dt_send: {entry.dt_send}");
-    //log.Info($"dt_requested: {entry.dt_requested}");
 
     string json = JsonConvert.SerializeObject(entry);
 

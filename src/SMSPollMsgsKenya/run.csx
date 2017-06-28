@@ -165,6 +165,14 @@ private static bool BlobExists(CloudBlobClient blobClient, string blobName, stri
 {
     log.Info($"Entering : BlobExists(CloudBlobClient blobClient, string blobName, string containerName, TraceWriter log)");
 
+    // Just in case the container does not exists
+    
+    // Retrieve a reference to a container.
+    CloudBlobContainer container = _blobClient.GetContainerReference(containerName);
+
+    // Create the container if it doesn't already exist.
+    container.CreateIfNotExists();
+
     return blobClient.GetContainerReference(containerName)
                     .GetBlockBlobReference(blobName)
                     .Exists();

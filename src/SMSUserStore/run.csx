@@ -57,8 +57,8 @@ public class SMSUserInfo
     public string country { get; set; }
     public string phoneNumber { get; set; }
     public string name { get; set; }
-    public string startTimestamp { get; set; }
-    public string completeTimestamp { get; set; }
+    public DateTime? startTimestamp { get; set; }
+    public DateTime? completeTimestamp { get; set; }
     public double? lat { get; set; }
     public double? lon { get; set; }
     public string gender { get; set; }

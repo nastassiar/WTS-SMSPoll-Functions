@@ -1,5 +1,7 @@
 #r "Newtonsoft.Json"
 
+ #load "../Common.csx"
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -28,8 +30,8 @@ public static void Run(string queueItem, ICollector<object> output, TraceWriter 
 
         var obj = new {
             source = "SMS",
-            startTimestamp = e.start_timestamp,
-            completeTimestamp = e.complete_timestamp,
+            startTimestamp = e.start_timestamp != null ? ConvertTimestampToDatetime(e.start_timestamp.Value) : DateTime.Now,
+            completeTimestamp = e.complete_timestamp ? ConvertTimestampToDatetime(e.complete_timestamp.Value) : null,
             phoneNumber = i.phone,
             lat = i.lat,
             lon = i.lon,

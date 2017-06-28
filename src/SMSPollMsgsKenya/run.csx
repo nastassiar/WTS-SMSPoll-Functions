@@ -10,10 +10,10 @@ using Microsoft.WindowsAzure.Storage.Blob; // Namespace for Blob storage types
 using Microsoft.ServiceBus.Messaging;
 using Newtonsoft.Json;
 
-private static string _apiAuth = GetEnvironmentVariable("EchoApiAuth");
-private static string _apiEid = GetEnvironmentVariable("EchoApiKenyaEid");
-private static string _apiPassword = GetEnvironmentVariable("EchoApiKenyaPassword");
-private static string _apiMaxPageSize = GetEnvironmentVariable("EchoApiKenyaSMSMaxPageSize");
+private static string _apiAuth = GetEnvironmentVariable("EchoApi_Auth");
+private static string _apiEid = GetEnvironmentVariable("EchoApi_Kenya_Eid");
+private static string _apiPassword = GetEnvironmentVariable("EchoApi_Kenya_Password");
+private static string _apiMaxPageSize = GetEnvironmentVariable("EchoApi_Kenya_SMSMaxPageSize");
 private static string _blobStorageConnectionString = GetEnvironmentVariable("BlobStorageConnectionString");
 private static string _lastExecTimeBlobName = "EchoApi-MsgKenyaLastExecutionTime";
 private static string _lastExecTimeContainerName = "echo-api-storage-test";

@@ -26,11 +26,6 @@ public static void Run(TimerInfo myTimer, ICollector<object> outputSbMsg, TraceW
 {
     log.Info($"C# Timer trigger function executed at: {DateTime.Now}");
 
-    log.Info($"_apiAuth : {_apiAuth}");
-    log.Info($"_apiAuth : {_apiEid}");
-    log.Info($"_apiAuth : {_apiMaxPageSize}");
-    log.Info($"_apiAuth : {_blobStorageConnectionString}");
-
     long unixLastExecTime = GetUnixLastExecTimestamp(_lastExecTimeBlobName, _lastExecTimeContainerName, log);
     log.Info($"UnixLastExecTime retrieved: {unixLastExecTime}");
 

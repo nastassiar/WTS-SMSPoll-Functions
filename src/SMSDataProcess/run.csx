@@ -22,12 +22,14 @@ public static void Run(string queueItem, out string outSBMessage, TraceWriter lo
         direction = msg.direction,
         phone = msg.phone,
         ts_send = msg.ts_send,
-        dt_send = ConvertTimestampToDatetime(msg.ts_send.Value, log),
+        dt_send = msg.dt_send == null ? null : ConvertTimestampToDatetime(msg.dt_send.Value, log),
         message = msg.message,
         delivery_status = msg.delivery_status,
         charge = msg.charge,
         ts_requested = msg.ts_requested,
-        dt_requested = ConvertTimestampToDatetime(msg.ts_requested.Value, log),
+        dt_requested = msg.ts_requested == null ? null : ConvertTimestampToDatetime(msg.ts_requested.Value, log),
+        ts_received = msg.ts_received,
+        dt_received = msg.ts_received == null ? null : ConvertTimestampToDatetime(msg.ts_received.Value, log),
         channel_text = msg.channel_text
     };
 

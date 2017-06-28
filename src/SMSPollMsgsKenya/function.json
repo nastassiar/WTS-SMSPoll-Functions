@@ -1,0 +1,19 @@
+{
+  "bindings": [
+    {
+      "name": "myTimer",
+      "type": "timerTrigger",
+      "direction": "in",
+      "schedule": "0 0 1 1 * *"
+    },
+    {
+      "type": "serviceBus",
+      "name": "outputSbMsg",
+      "queueName": "testqueue",
+      "connection": "TestSBConnString",
+      "accessRights": "Manage",
+      "direction": "out"
+    }
+  ],
+  "disabled": false
+}

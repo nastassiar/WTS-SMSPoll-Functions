@@ -92,7 +92,7 @@ public static void Run(string queueItem, TraceWriter log, ICollector<object> dat
                         // What the change was to (comment, post, like, reaction etc.)
                         item = change.value.item,
                         // The time the change was made
-                        createdTime = change.value.created_time != null ? ConvertTimestampToDatetime(change.value.created_time) : DateTime.Now,
+                        createdTime = change.value.created_time != null ? ConvertTimestampToDatetime(change.value.created_time.Value) : DateTime.Now,
                         // The Id of the photo 
                         photoId = change.value.photo_id,
                         // The Id of the Share 

@@ -22,7 +22,7 @@ public static void Run(string queueItem, out string outSBMessage, TraceWriter lo
         direction = msg.direction,
         phone = msg.phone,
         ts_send = msg.ts_send,
-        dt_send = msg.dt_send == null ? null : ConvertTimestampToDatetime(msg.dt_send.Value, log),
+        dt_send = msg.ts_send == null ? null : ConvertTimestampToDatetime(msg.ts_send.Value, log),
         message = msg.message,
         delivery_status = msg.delivery_status,
         charge = msg.charge,
@@ -39,6 +39,6 @@ public static void Run(string queueItem, out string outSBMessage, TraceWriter lo
     log.Info($"dt_requested: {entry.dt_requested}");
 
     string json = JsonConvert.SerializeObject(entry);
-
+    
     outSBMessage = json;
 }

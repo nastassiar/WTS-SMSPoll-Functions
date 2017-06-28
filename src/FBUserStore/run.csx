@@ -38,5 +38,5 @@ public class FacebookUserInfo
 {
     public string senderId { get; set; }
     public string senderName { get; set; }
-    public int createdTime { get; set; }
+    public DateTime createdTime { get; set; }
 }

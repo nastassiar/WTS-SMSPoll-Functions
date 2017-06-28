@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 public static void Run(string queueItem, ICollector<object> output, TraceWriter log)
 {
-    dynamic i = JObject.Parse(queueItem);
+    dynamic m = JObject.Parse(queueItem);
+    var i = m.client;
+    string location = m.location;
 
     var surveys = i.client_surveys;
 
@@ -20,7 +22,7 @@ public static void Run(string queueItem, ICollector<object> output, TraceWriter 
         IEnumerable<dynamic> responses = e.responses;
         // From Responses
         string name =  responses.FirstOrDefault(p => p.qid == "NAME")?.parsed_response; //"qid":"NAME"
-        string yob = responses.FirstOrDefault(p => p.qid == "Y.O.B")?.parsed_response;// "qid":"Y.O.B"
+        string yob = responses.FirstOrDefault(p => p.qid == "Y.O.B")?.parsed_response ?? responses.FirstOrDefault(p => p.qid == "YOB")?.parsed_response;// "qid":"Y.O.B"
         string gender = responses.FirstOrDefault(p => p.qid == "GENDER")?.parsed_response; // "qid":"GENDER"
         string county = responses.FirstOrDefault(p => p.qid == "COUNTY")?.parsed_response;; // "qid":"COUNTY"
 
@@ -34,7 +36,8 @@ public static void Run(string queueItem, ICollector<object> output, TraceWriter 
             gender = gender == "1" ? "Female" : "Male",
             yob = yob,
             name = name ?? i.name, 
-            county = county ?? i.locationTextRaw
+            county = county ?? i.locationTextRaw,
+            country = location
         };
         
         log.Info("OBJ : "+obj);

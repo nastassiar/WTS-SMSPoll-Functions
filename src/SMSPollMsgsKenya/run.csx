@@ -52,7 +52,7 @@ public static void Run(TimerInfo myTimer, ICollector<object> outputSbMsg, TraceW
 
     } while (msgProcessed > 0);
 
-    log.Info($"Processed a total of: {totalMsgProcessed} messages.");
+    log.Info($"******   Processed a total of: {totalMsgProcessed} messages.  ******");
 
     UpdateBlobLastExecTime(_lastExecTimeBlobName, _lastExecTimeContainerName, currentTimestamp, log);
 
@@ -65,7 +65,8 @@ private static int PollSMSMessages(int requestPage, long since, long until, ICol
     string urlPath = $"https://m-swali-hrd.appspot.com/api/cms/msglog?auth={_apiAuth}&eid={_apiEid}&password={_apiPassword}&source=5&since={since}&until={until}&page={requestPage}&max={_apiMaxPageSize}";
     Uri uri = new Uri(urlPath);
 
-    log.Info(urlPath);
+    string urlPathModified = urlPath.Replace($"password={_apiPassword}", "password=**** :) ****");
+    log.Info(urlPathModified);
     
     HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
     request.Method = restMethod;

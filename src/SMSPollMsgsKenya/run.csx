@@ -15,8 +15,9 @@ private static string _apiEid = GetEnvironmentVariable("EchoApi_Kenya_Eid");
 private static string _apiPassword = GetEnvironmentVariable("EchoApi_Kenya_Password");
 private static string _apiMaxPageSize = GetEnvironmentVariable("EchoApi_Kenya_SMSMaxPageSize");
 private static string _blobStorageConnectionString = GetEnvironmentVariable("BlobStorageConnectionString");
+
 private static string _lastExecTimeBlobName = "EchoApi-MsgKenyaLastExecutionTime";
-private static string _lastExecTimeContainerName = "echo-api-storage-test";
+private static string _lastExecTimeContainerName = "echo-api-storage";
 
 private static CloudStorageAccount _storageAccount = CloudStorageAccount.Parse(_blobStorageConnectionString);
 private static CloudBlobClient _blobClient = _storageAccount.CreateCloudBlobClient();
@@ -24,6 +25,11 @@ private static CloudBlobClient _blobClient = _storageAccount.CreateCloudBlobClie
 public static void Run(TimerInfo myTimer, ICollector<object> outputSbMsg, TraceWriter log)
 {
     log.Info($"C# Timer trigger function executed at: {DateTime.Now}");
+
+    log.Info($"_apiAuth : {_apiAuth}");
+    log.Info($"_apiAuth : {_apiEid}");
+    log.Info($"_apiAuth : {_apiMaxPageSize}");
+    log.Info($"_apiAuth : {_blobStorageConnectionString}");
 
     long unixLastExecTime = GetUnixLastExecTimestamp(_lastExecTimeBlobName, _lastExecTimeContainerName, log);
     log.Info($"UnixLastExecTime retrieved: {unixLastExecTime}");
@@ -59,7 +65,7 @@ private static int PollSMSMessages(int requestPage, long since, long until, ICol
     string urlPath = $"https://m-swali-hrd.appspot.com/api/cms/msglog?auth={_apiAuth}&eid={_apiEid}&password={_apiPassword}&source=5&since={since}&until={until}&page={requestPage}&max={_apiMaxPageSize}";
     Uri uri = new Uri(urlPath);
 
-    //log.Info(urlPath);
+    log.Info(urlPath);
     
     HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
     request.Method = restMethod;
@@ -166,7 +172,7 @@ private static bool BlobExists(CloudBlobClient blobClient, string blobName, stri
     log.Info($"Entering : BlobExists(CloudBlobClient blobClient, string blobName, string containerName, TraceWriter log)");
 
     // Just in case the container does not exists
-    
+
     // Retrieve a reference to a container.
     CloudBlobContainer container = _blobClient.GetContainerReference(containerName);
 

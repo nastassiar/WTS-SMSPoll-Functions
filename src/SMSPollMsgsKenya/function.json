@@ -9,7 +9,7 @@
     {
       "type": "serviceBus",
       "name": "outputSbMsg",
-      "queueName": "testqueue",
+      "queueName": "sms_data_toprocess",
       "connection": "AzureWebJobsServiceBus",
       "accessRights": "Manage",
       "direction": "out"

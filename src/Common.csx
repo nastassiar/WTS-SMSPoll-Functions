@@ -7,7 +7,9 @@ private static DateTime ConvertTimestampToDatetime(double unixTimestamp)
 
 private static DateTime ConvertTimestampToDatetime(double unixTimestamp, TraceWriter log)
 {
-    ConvertTimestampToDatetime( unixTimestamp);
+    // Unix timestamp is seconds past epoch
+    System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Local);
+    dtDateTime = dtDateTime.AddSeconds(unixTimestamp).ToLocalTime();
 
     log.Info($"Converted '{unixTimestamp}' to {dtDateTime}.");
 

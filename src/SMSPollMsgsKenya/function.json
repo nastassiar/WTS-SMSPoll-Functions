@@ -10,7 +10,7 @@
       "type": "serviceBus",
       "name": "outputSbMsg",
       "queueName": "testqueue",
-      "connection": "TestSBConnString",
+      "connection": "AzureWebJobsServiceBus",
       "accessRights": "Manage",
       "direction": "out"
     }

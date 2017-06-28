@@ -10,11 +10,10 @@ using Newtonsoft.Json.Linq;
 public static void Run(string queueItem, out string outSBMessage, TraceWriter log)
 {
     log.Info("SMSDataProcess function processing message");
-
-    // Just save the object
-    dynamic msg = JObject.Parse(queueItem);
-
     log.Info($"Received: {queueItem}");
+
+    // Parse into a JSon Object
+    dynamic msg = JObject.Parse(queueItem);
 
     var entry = new
     {
@@ -32,10 +31,10 @@ public static void Run(string queueItem, out string outSBMessage, TraceWriter lo
         channel_text = msg.channel_text
     };
 
-    log.Info($"phone: {msg.phone.Value}");
-    log.Info($"message: {msg.message.Value}");
-    log.Info($"dt_send: {msg.dt_send.Value}");
-    log.Info($"dt_requested: {msg.dt_requested.Value}");
+    log.Info($"phone: {entry.phone}");
+    log.Info($"message: {entry.message}");
+    log.Info($"dt_send: {entry.dt_send}");
+    log.Info($"dt_requested: {entry.dt_requested}");
 
     string json = JsonConvert.SerializeObject(entry);
 

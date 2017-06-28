@@ -15,7 +15,7 @@ public static void Run(SMSUserInfo queueItem, IEnumerable<dynamic> documents, ou
         
         //log.Info("inputDocument : "+ existingUser);
         existingUser.Id = queueItem.phoneNumber;
-        existingUser.phoneNumber = queueItem.phoneNumber ?? existingUser.phoneNumber ;
+        existingUser.phoneNumber = queueItem.phoneNumber ?? existingUser.phoneNumber;
         existingUser.name = queueItem.name ?? existingUser.name;
         existingUser.startTimestamp = queueItem.startTimestamp  ?? existingUser.startTimeStamp;
         existingUser.completeTimestamp = queueItem.completeTimestamp  ?? existingUser.completeTimestamp;
@@ -24,6 +24,8 @@ public static void Run(SMSUserInfo queueItem, IEnumerable<dynamic> documents, ou
         existingUser.gender = queueItem.gender ?? existingUser.gender;
         existingUser.yob = queueItem.yob ?? existingUser.yob;
         existingUser.county = queueItem.county ?? existingUser.county;
+        existingUser.country = queueItem.country ?? existingUser.country;
+        existingUser.source = queueItem.source ?? existingUser.source;
         outputDocument = existingUser;
     }
     else 
@@ -31,6 +33,7 @@ public static void Run(SMSUserInfo queueItem, IEnumerable<dynamic> documents, ou
         log.Info("User not found! Create!");
         outputDocument = new 
         {
+            source = queueItem.source,
             Id = queueItem.phoneNumber,
             phoneNumber = queueItem.phoneNumber,
             name = queueItem.name,
@@ -40,7 +43,8 @@ public static void Run(SMSUserInfo queueItem, IEnumerable<dynamic> documents, ou
             lon = queueItem.lon,
             gender = queueItem.gender,
             yob = queueItem.yob,
-            county = queueItem.county
+            county = queueItem.county,
+            country = queueItem.country
         };
     }
     
@@ -49,6 +53,8 @@ public static void Run(SMSUserInfo queueItem, IEnumerable<dynamic> documents, ou
 
 public class SMSUserInfo
 {
+    public string source {get; set;}
+    public string country { get; set; }
     public string phoneNumber { get; set; }
     public string name { get; set; }
     public string startTimestamp { get; set; }
@@ -56,6 +62,6 @@ public class SMSUserInfo
     public double? lat { get; set; }
     public double? lon { get; set; }
     public string gender { get; set; }
-    public int? yob { get; set; }
+    public string yob { get; set; }
     public string county { get; set; }
 }

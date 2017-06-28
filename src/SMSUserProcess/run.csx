@@ -20,11 +20,12 @@ public static void Run(string queueItem, ICollector<object> output, TraceWriter 
         IEnumerable<dynamic> responses = e.responses;
         // From Responses
         string name =  responses.FirstOrDefault(p => p.qid == "NAME")?.parsed_response; //"qid":"NAME"
-        int? yob = responses.FirstOrDefault(p => p.qid == "Y.O.B")?.parsed_response;// "qid":"Y.O.B"
+        string yob = responses.FirstOrDefault(p => p.qid == "Y.O.B")?.parsed_response;// "qid":"Y.O.B"
         string gender = responses.FirstOrDefault(p => p.qid == "GENDER")?.parsed_response; // "qid":"GENDER"
         string county = responses.FirstOrDefault(p => p.qid == "COUNTY")?.parsed_response;; // "qid":"COUNTY"
 
         var obj = new {
+            source = "SMS",
             startTimestamp = e.start_timestamp,
             completeTimestamp = e.complete_timestamp,
             phoneNumber = i.phone,

@@ -27,6 +27,7 @@ public static void Run(FacebookUserInfo queueItem, IEnumerable<dynamic> document
             facebookId = queueItem.senderId,
             createdTime = queueItem.createdTime,
             lastUpdatedTime = queueItem.createdTime
+            source = "FB",
         };
     }
     

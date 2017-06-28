@@ -1,6 +1,6 @@
 #r "Newtonsoft.Json"
 
- #load "../Common.csx"
+ #load "./Common.csx"
 
 using System;
 using System.Threading.Tasks;
@@ -39,6 +39,6 @@ public static void Run(string queueItem, out string outSBMessage, TraceWriter lo
     log.Info($"dt_requested: {entry.dt_requested}");
 
     string json = JsonConvert.SerializeObject(entry);
-    
+
     outSBMessage = json;
 }

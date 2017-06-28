@@ -111,10 +111,10 @@ private static long GetUnixLastExecTimestamp(string blobName, string containerNa
     if (!BlobExists(blobName, containerName, log))
     {
         // Get current datetime minus 1 hour
-        long unixTimestamp = GetCurrentDateTimeInUnixAddHours(-1);
+        unixLastExecTimestamp = GetCurrentDateTimeInUnixAddHours(-1);
 
         // Create the blob
-        UpdateBlobLastExecTime(blobName, containerName, unixTimestamp, log);
+        UpdateBlobLastExecTime(blobName, containerName, unixLastExecTimestamp, log);
     }
     else
     {

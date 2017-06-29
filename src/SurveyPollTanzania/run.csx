@@ -13,10 +13,10 @@ using Microsoft.ServiceBus.Messaging;
 using Newtonsoft.Json;
 
 private static string _apiAuth = GetEnvironmentVariable("EchoApi_Auth");
-private static string _api_TZ_Eid = GetEnvironmentVariable("EchoApi_Tanzania_Eid");
-private static string _api_TZ_Password = GetEnvironmentVariable("EchoApi_Tanzania_Password");
-private static string _api_TZ_MaxPageSize = GetEnvironmentVariable("EchoApi_Tanzania_SurveyMaxPageSize");
-private static string _api_TZ_SurveySid = GetEnvironmentVariable("EchoApi_Tanzania_SurveySid");
+private static string _apiEid = GetEnvironmentVariable("EchoApi_Tanzania_Eid");
+private static string _apiPassword = GetEnvironmentVariable("EchoApi_Tanzania_Password");
+private static string _apiMaxPageSize = GetEnvironmentVariable("EchoApi_Tanzania_SurveyMaxPageSize");
+private static string _apiSurveySid = GetEnvironmentVariable("EchoApi_Tanzania_SurveySid");
 private static string _blobStorageConnectionString = GetEnvironmentVariable("BlobStorageConnectionString");
 
 private static string _lastExecTimeBlobName = "EchoApi-SurveyTanzaniaLastExecutionTime";
@@ -30,10 +30,10 @@ public static void Run(TimerInfo myTimer, ICollector<object> outputSbMsg, TraceW
     log.Info($"UnixLastExecTime retrieved: {unixLastExecTime}");
 
     log.Info($"_apiAuth: {_apiAuth}");
-    log.Info($"_api_TZ_Eid: {_api_TZ_Eid}");
-    log.Info($"_api_TZ_Password: {_api_TZ_Password}");
-    log.Info($"_api_TZ_MaxPageSize: {_api_TZ_MaxPageSize}");
-    log.Info($"_api_TZ_SurveySid: {_api_TZ_SurveySid}");
+    log.Info($"_apiEid: {_apiEid}");
+    log.Info($"_apiPassword: {_apiPassword}");
+    log.Info($"_apiMaxPageSize: {_apiMaxPageSize}");
+    log.Info($"_apiSurveySid: {_apiSurveySid}");
     log.Info($"_blobStorageConnectionString: {_blobStorageConnectionString}");
 
     int requestPage = 0;
@@ -63,10 +63,10 @@ public static void Run(TimerInfo myTimer, ICollector<object> outputSbMsg, TraceW
 private static int PollSMSClients(int requestPage, long since, long until, ICollector<object> outputSbMsg, TraceWriter log)
 {
     string restMethod = "POST";
-    string urlPath = $"https://m-swali-hrd.appspot.com/api/v2/survey_data?auth={_apiAuth}&eid={_api_TZ_Eid}&password={_api_TZ_Password}&source=5&since={since}&until={until}&sid={_api_TZ_SurveySid}&page_indexing=0&page={requestPage}&max={_api_TZ_MaxPageSize}";
+    string urlPath = $"https://m-swali-hrd.appspot.com/api/v2/survey_data?auth={_apiAuth}&eid={_apiEid}&password={_apiPassword}&source=5&since={since}&until={until}&sid={_apiSurveySid}&page_indexing=0&page={requestPage}&max={_apiMaxPageSize}";
     Uri uri = new Uri(urlPath);
 
-    string urlPathModified = urlPath.Replace($"password={_api_TZ_Password}", "password=*******");
+    string urlPathModified = urlPath.Replace($"password={_apiPassword}", "password=*******");
     log.Info(urlPathModified);
     
     HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);

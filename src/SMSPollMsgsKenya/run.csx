@@ -1,6 +1,6 @@
 #r "Newtonsoft.Json"
 
- #load "./Common.csx"
+ #load "../Common.csx"
 
 using System;
 using System.Web;

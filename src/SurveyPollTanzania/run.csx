@@ -13,13 +13,13 @@ using Microsoft.ServiceBus.Messaging;
 using Newtonsoft.Json;
 
 private static string _apiAuth = GetEnvironmentVariable("EchoApi_Auth");
-private static string _apiEid = GetEnvironmentVariable("EchoApi_Kenya_Eid");
-private static string _apiPassword = GetEnvironmentVariable("EchoApi_Kenya_Password");
-private static string _apiMaxPageSize = GetEnvironmentVariable("EchoApi_Kenya_SurveyMaxPageSize");
-private static string _apiSurveySid = GetEnvironmentVariable("EchoApi_Kenya_SurveySid");
+private static string _apiEid = GetEnvironmentVariable("EchoApi_Tanzania_Eid");
+private static string _apiPassword = GetEnvironmentVariable("EchoApi_Tanzania_Password");
+private static string _apiMaxPageSize = GetEnvironmentVariable("EchoApi_Tanzania_SurveyMaxPageSize");
+private static string _apiSurveySid = GetEnvironmentVariable("EchoApi_Tanzania_SurveySid");
 private static string _blobStorageConnectionString = GetEnvironmentVariable("BlobStorageConnectionString");
 
-private static string _lastExecTimeBlobName = "EchoApi-SurveyKenyaLastExecutionTime";
+private static string _lastExecTimeBlobName = "EchoApi-SurveyTanzaniaLastExecutionTime";
 private static string _lastExecTimeContainerName = "echo-api-storage";
 
 public static void Run(TimerInfo myTimer, ICollector<object> outputSbMsg, TraceWriter log)
@@ -88,7 +88,7 @@ private static int PollSMSClients(int requestPage, long since, long until, IColl
                 var entry = new 
                 {
                     type = "sms_survey",
-                    location = "KE",
+                    location = "TZ",
                     client = client
                 };
 

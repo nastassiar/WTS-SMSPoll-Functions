@@ -29,6 +29,13 @@ public static void Run(TimerInfo myTimer, ICollector<object> outputSbMsg, TraceW
     long unixLastExecTime = GetUnixLastExecTimestamp(_lastExecTimeBlobName, _lastExecTimeContainerName, log);
     log.Info($"UnixLastExecTime retrieved: {unixLastExecTime}");
 
+    log.Info($"_apiAuth: {_apiAuth}");
+    log.Info($"_api_TZ_Eid: {_api_TZ_Eid}");
+    log.Info($"_api_TZ_Password: {_api_TZ_Password}");
+    log.Info($"_api_TZ_MaxPageSize: {_api_TZ_MaxPageSize}");
+    log.Info($"_api_TZ_SurveySid: {_api_TZ_SurveySid}");
+    log.Info($"_blobStorageConnectionString: {_blobStorageConnectionString}");
+
     int requestPage = 0;
     int clientsProcessed = 0;
     int totalClientsProcessed = 0;

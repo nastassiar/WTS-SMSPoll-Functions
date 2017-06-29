@@ -29,6 +29,13 @@ public static void Run(TimerInfo myTimer, ICollector<object> outputSbMsg, TraceW
     long unixLastExecTime = GetUnixLastExecTimestamp(_lastExecTimeBlobName, _lastExecTimeContainerName, log);
     log.Info($"UnixLastExecTime retrieved: {unixLastExecTime}");
 
+    log.Info($"_apiAuth: {_apiAuth}");
+    log.Info($"_api_KE_Eid: {_api_KE_Eid}");
+    log.Info($"_api_KE_Password: {_api_KE_Password}");
+    log.Info($"_api_KE_MaxPageSize: {_api_KE_MaxPageSize}");
+    log.Info($"_api_KE_SurveySid: {_api_KE_SurveySid}");
+    log.Info($"_blobStorageConnectionString: {_blobStorageConnectionString}");
+    
     int requestPage = 0;
     int clientsProcessed = 0;
     int totalClientsProcessed = 0;
@@ -56,7 +63,7 @@ public static void Run(TimerInfo myTimer, ICollector<object> outputSbMsg, TraceW
 private static int PollSMSClients(int requestPage, long since, long until, ICollector<object> outputSbMsg, TraceWriter log)
 {
     string restMethod = "POST";
-    string urlPath = $"https://m-swali-hrd.appspot.com/api/v2/survey_data?auth={_api_Auth}&eid={_api_KE_Eid}&password={_api_KE_Password}&source=5&since={since}&until={until}&sid={_api_KE_SurveySid}&page_indexing=0&page={requestPage}&max={_api_KE_MaxPageSize}";
+    string urlPath = $"https://m-swali-hrd.appspot.com/api/v2/survey_data?auth={_apiAuth}&eid={_api_KE_Eid}&password={_api_KE_Password}&source=5&since={since}&until={until}&sid={_api_KE_SurveySid}&page_indexing=0&page={requestPage}&max={_api_KE_MaxPageSize}";
     Uri uri = new Uri(urlPath);
 
     string urlPathModified = urlPath.Replace($"password={_api_KE_Password}", "password=*******");

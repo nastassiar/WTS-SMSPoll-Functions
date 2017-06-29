@@ -13,10 +13,10 @@ using Microsoft.ServiceBus.Messaging;
 using Newtonsoft.Json;
 
 private static string _apiAuth = GetEnvironmentVariable("EchoApi_Auth");
-private static string _apiEid = GetEnvironmentVariable("EchoApi_Kenya_Eid");
-private static string _apiPassword = GetEnvironmentVariable("EchoApi_Kenya_Password");
-private static string _apiMaxPageSize = GetEnvironmentVariable("EchoApi_Kenya_SurveyMaxPageSize");
-private static string _apiSurveySid = GetEnvironmentVariable("EchoApi_Kenya_SurveySid");
+private static string _api_KE_Eid = GetEnvironmentVariable("EchoApi_Kenya_Eid");
+private static string _api_KE_Password = GetEnvironmentVariable("EchoApi_Kenya_Password");
+private static string _api_KE_MaxPageSize = GetEnvironmentVariable("EchoApi_Kenya_SurveyMaxPageSize");
+private static string _api_KE_SurveySid = GetEnvironmentVariable("EchoApi_Kenya_SurveySid");
 private static string _blobStorageConnectionString = GetEnvironmentVariable("BlobStorageConnectionString");
 
 private static string _lastExecTimeBlobName = "EchoApi-SurveyKenyaLastExecutionTime";
@@ -56,10 +56,10 @@ public static void Run(TimerInfo myTimer, ICollector<object> outputSbMsg, TraceW
 private static int PollSMSClients(int requestPage, long since, long until, ICollector<object> outputSbMsg, TraceWriter log)
 {
     string restMethod = "POST";
-    string urlPath = $"https://m-swali-hrd.appspot.com/api/v2/survey_data?auth={_apiAuth}&eid={_apiEid}&password={_apiPassword}&source=5&since={since}&until={until}&sid={_apiSurveySid}&page_indexing=0&page={requestPage}&max={_apiMaxPageSize}";
+    string urlPath = $"https://m-swali-hrd.appspot.com/api/v2/survey_data?auth={_api_Auth}&eid={_api_KE_Eid}&password={_api_KE_Password}&source=5&since={since}&until={until}&sid={_api_KE_SurveySid}&page_indexing=0&page={requestPage}&max={_api_KE_MaxPageSize}";
     Uri uri = new Uri(urlPath);
 
-    string urlPathModified = urlPath.Replace($"password={_apiPassword}", "password=*******");
+    string urlPathModified = urlPath.Replace($"password={_api_KE_Password}", "password=*******");
     log.Info(urlPathModified);
     
     HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);

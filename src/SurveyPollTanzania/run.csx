@@ -29,12 +29,12 @@ public static void Run(TimerInfo myTimer, ICollector<object> outputSbMsg, TraceW
     long unixLastExecTime = GetUnixLastExecTimestamp(_lastExecTimeBlobName, _lastExecTimeContainerName, log);
     log.Info($"UnixLastExecTime retrieved: {unixLastExecTime}");
 
-    log.Info($"_apiAuth: {_apiAuth}");
-    log.Info($"_apiEid: {_apiEid}");
-    log.Info($"_apiPassword: {_apiPassword}");
-    log.Info($"_apiMaxPageSize: {_apiMaxPageSize}");
-    log.Info($"_apiSurveySid: {_apiSurveySid}");
-    log.Info($"_blobStorageConnectionString: {_blobStorageConnectionString}");
+    //log.Info($"_apiAuth: {_apiAuth}");
+    //log.Info($"_apiEid: {_apiEid}");
+    //log.Info($"_apiPassword: {_apiPassword}");
+    //log.Info($"_apiMaxPageSize: {_apiMaxPageSize}");
+    //log.Info($"_apiSurveySid: {_apiSurveySid}");
+    //log.Info($"_blobStorageConnectionString: {_blobStorageConnectionString}");
 
     int requestPage = 0;
     int clientsProcessed = 0;

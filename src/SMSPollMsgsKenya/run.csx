@@ -55,7 +55,7 @@ public static void Run(TimerInfo myTimer, ICollector<object> outputSbMsg, TraceW
 private static int PollSMSMessages(int requestPage, long since, long until, ICollector<object> outputSbMsg, TraceWriter log)
 {
     string restMethod = "GET";
-    string urlPath = $"https://m-swali-hrd.appspot.com/api/cms/msglog?auth={_apiAuth}&eid={_apiEid}&password={_apiPassword}&source=5&since={since}&until={until}&page={requestPage}&max={_apiMaxPageSize}";
+    string urlPath = $"https://m-swali-hrd.appspot.com/api/cms/msglog?auth={_apiAuth}&eid={_apiEid}&password={_apiPassword}&source=5&since={since}&until={until}&page={requestPage}&max={_apiMaxPageSize}&direction=1";
     Uri uri = new Uri(urlPath);
 
     string urlPathModified = urlPath.Replace($"password={_apiPassword}", "password=*******");
